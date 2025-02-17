@@ -45,6 +45,7 @@ module.exports = {
       exposes: {
         './Button': './src/components/button/button.tsx',
         './Input': './src/components/input/input.tsx',
+        './IncreaseDecrease': './src/components/increase-decrease/increase-decrease.tsx',
       },
       shared: {
         react: { 

@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import { FC, lazy, Suspense } from 'react';
 import styles from './product-card.module.scss';
 import { FiStar } from 'react-icons/fi';
 import { euro } from '@/constant';
 import { ProductType } from '@/types/product-type';
-// import IncreaseDecrease from '@/components/public/increase-decrease/increase-decrease';
 
+
+const IncreaseDecrease = lazy(() => import('ComponentsEntry/IncreaseDecrease'));
 
 interface ProductCardProps {
   product: ProductType;
@@ -54,13 +54,14 @@ const ProductCard: FC<ProductCardProps> = ({
         </a>
         <div className={styles.content}>
           {price !== 0 ? (
-            // <IncreaseDecrease
-            //   className={styles.add}
-            //   value={value}
-            //   addBtnText="Add"
-            //   onChange={onChangeProduct}
-            // />
-            <></>
+            <Suspense fallback={<div>Loading...</div>}>
+              <IncreaseDecrease
+                className={styles.add}
+                value={value}
+                addBtnText='Add'
+                onChange={onChangeProduct}
+              />
+            </Suspense>
           ) : (
             <div className={styles.add} />
           )}

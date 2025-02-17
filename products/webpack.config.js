@@ -40,11 +40,15 @@ module.exports = {
   },  
   plugins: [
     new ModuleFederationPlugin({
-      name: 'Components',
+      name: 'Products',
       filename: 'remoteEntry.js',
       exposes: {
         './ProductCard': './src/components/product-card/product-card.tsx',
         './ProductList': './src/components/product-list/product-list.tsx',
+      },
+      remotes: {
+        ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js', 
+        MainEntry: 'Main@http://localhost:3000/remoteEntry.js',       
       },
       shared: {
         react: { 

@@ -3,9 +3,10 @@ import ProductCard from '@/components/product-card/product-card';
 import styles from './product-list.module.scss';
 import { ProductType } from '@/types/product-type';
 import { Products } from '@/data/products';
+import { useStore } from 'MainEntry/Store';
 
 const ProductList = () => {
-  //const { changeProduct, getProductCount } = useCart();
+  const { setCart, cart } = useStore();
   const [products, setProducts] = useState<ProductType[]>();
 
   useEffect(() => {
@@ -19,12 +20,18 @@ const ProductList = () => {
 
     fetchProducts();
   }, []);
-  const onChangeProduct = (productid: number, count: number) => {
-    //changeProduct(productid, count);
+  const onChangeProduct = (
+    productid: number,
+    caption: string,
+    count: number
+  ) => {
+    console.log('productid', productid, count);
+    setCart({ id: productid.toString(), caption: caption, quantity: count });
   };
-  const getProductCount = (productid: number) => {  
-    //return getProductCount(productid);
-    return 3;
+  const getProductCount = (productid: number) => {
+    return (
+      cart.filter((item) => item.id === productid.toString())[0]?.quantity || 0
+    );
   };
   return (
     <div className={styles.productList}>
@@ -36,7 +43,7 @@ const ProductList = () => {
             product={p}
             value={getProductCount(p.id)}
             onChange={(value) => {
-                onChangeProduct(p.id, value);
+              onChangeProduct(p.id, p.caption, value);
             }}
           />
         ))}

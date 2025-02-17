@@ -28,10 +28,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'MainApp',
+      name: 'Main',
       filename: 'remoteEntry.js',
       remotes: {
         ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js',
+        ProductsEntry: 'Products@http://localhost:3002/remoteEntry.js',
+      },
+      exposes: {
+        "./Store": "./src/store/store.tsx"
       },
       shared: {
         react: { 

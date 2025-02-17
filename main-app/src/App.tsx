@@ -1,7 +1,10 @@
 import React, { lazy, Suspense } from 'react';
+import { StoreProvider } from './store/store';
+import Header from './components/header/header';
 
 const Input = lazy(() => import('ComponentsEntry/Input'));
 const Button = lazy(() => import('ComponentsEntry/Button'));
+const ProductList = lazy(() => import('ProductsEntry/ProductList'));
 
 const App: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
@@ -9,15 +12,18 @@ const App: React.FC = () => {
     setValue(e.target.value);
   };
   return (
-    <div>
-      <h1>Hello Microfronted</h1>
+    <StoreProvider>      
+      <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Input value={value} onChange={onChange} />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <Button variant="filled" size="m" onClick={() => alert(value)}><span>Click me!</span></Button>
       </Suspense>
-    </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductList/>
+      </Suspense>
+    </StoreProvider>
   );
 };
 
