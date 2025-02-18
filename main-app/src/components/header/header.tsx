@@ -20,6 +20,7 @@ const Header = () => {
       {showCart && (
         <ul className='cart-items'>
           {cart.map((cartItem) => {
+            if(cartItem.quantity === 0) return null;
             return (
               <li key={cartItem.id}>
                 {cartItem.caption} ({cartItem.quantity})
