@@ -1,40 +1,44 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.tsx',
+  entry: './src/index.tsx', 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+    publicPath: 'auto',
   },
+
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
+    compress: true,
+    open: true,
+    port: 3003,
+    historyApiFallback: true,
+    hot: true, 
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    // },   
+  },  
   plugins: [
     new ModuleFederationPlugin({
-      name: 'Main',
+      name: 'Stores',
       filename: 'remoteEntry.js',
-      remotes: {
-        ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js',
-        ProductsEntry: 'Products@http://localhost:3002/remoteEntry.js',
-        StoreEntry: 'Stores@http://localhost:3003/remoteEntry.js',
-      },
+      exposes: {
+        "./Store": "./src/redux/expose-store.ts"
+      },      
       shared: {
         react: { 
           singleton: true, 
@@ -56,20 +60,25 @@ module.exports = {
           requiredVersion: false,
           eager: true
         }
-      },      
+      },
     }),
-    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
     }),
+    new CleanWebpackPlugin(),
   ],
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 3000,
-    historyApiFallback: true,
-    hot: true,
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      }, 
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
 };

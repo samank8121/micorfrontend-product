@@ -34,9 +34,6 @@ module.exports = {
     port: 3002,
     historyApiFallback: true,
     hot: true, 
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    // },   
   },  
   plugins: [
     new ModuleFederationPlugin({
@@ -48,7 +45,7 @@ module.exports = {
       },
       remotes: {
         ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js', 
-        MainEntry: 'Main@http://localhost:3000/remoteEntry.js',       
+        StoreEntry: 'Stores@http://localhost:3003/remoteEntry.js',       
       },
       shared: {
         react: { 
@@ -58,6 +55,16 @@ module.exports = {
         },
         'react-dom': { 
           singleton: true, 
+          requiredVersion: false,
+          eager: true
+        },
+        'react-redux': {
+          singleton: true,
+          requiredVersion: false,
+          eager: true
+        },
+        '@reduxjs/toolkit': {
+          singleton: true,
           requiredVersion: false,
           eager: true
         }

@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { StoreProvider } from './redux/provider';
+import { StoreProvider } from 'StoreEntry/Store';
 import Header from './components/header/header';
 
 const Input = lazy(() => import('ComponentsEntry/Input'));

@@ -3,7 +3,7 @@ import ProductCard from '@/components/product-card/product-card';
 import styles from './product-list.module.scss';
 import { ProductType } from '@/types/product-type';
 import { Products } from '@/data/products';
-import { useCartStore } from 'MainEntry/Store';
+import { useCartStore } from 'StoreEntry/Store';
 
 const ProductList = () => {
   const { setCart, cart } = useCartStore();

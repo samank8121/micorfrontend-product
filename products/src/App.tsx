@@ -1,16 +1,22 @@
-import React from 'react';
-import styles from './App.module.scss';
+import React, { Suspense } from 'react';
 import ProductList from './components/product-list/product-list';
+import { StoreProvider } from 'StoreEntry/Store';
 
-import { StoreProvider } from 'MainEntry/Store';
-console.log('StoreProvider', StoreProvider);
+// const StoreProvider = React.lazy(() =>
+//   import('StoreEntry/Store').then((module) => ({
+//     default: module.StoreProvider,
+//   }))
+// );
+
 const App: React.FC = () => {
   return (
-    <StoreProvider>
-      <div className={styles.app}>
-        <ProductList />
-      </div>
-    </StoreProvider>
+    // <Suspense fallback={<div>Loading...</div>}>
+      <StoreProvider>
+        <div className='app'>
+          <ProductList />
+        </div>
+      </StoreProvider>
+    // </Suspense>
   );
 };
 

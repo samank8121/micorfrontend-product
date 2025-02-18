@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import './header.css';
-import { useCartStore } from '../../redux/hooks/cart';
+import { useCartStore } from 'StoreEntry/Store';
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
