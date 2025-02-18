@@ -35,7 +35,7 @@ module.exports = {
         ProductsEntry: 'Products@http://localhost:3002/remoteEntry.js',
       },
       exposes: {
-        "./Store": "./src/store/store.tsx"
+        "./Store": "./src/redux/expose-store.tsx"
       },
       shared: {
         react: { 

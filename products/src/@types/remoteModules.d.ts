@@ -15,7 +15,7 @@ declare module 'MainEntry/Store' {
   import { ReactNode } from 'react';
 
   export const StoreProvider: ({ children }: { children: ReactNode }) => JSX.Element;
-  export function useStore(): {
+  export function useCartStore(): {
     cart: { id: string; caption: string; quantity: number }[];
     setCart: (newItem: { id: string; caption: string; quantity: number }) => void;
   };

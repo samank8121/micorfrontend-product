@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductCard from '@/components/product-card/product-card';
 import styles from './product-list.module.scss';
 import { ProductType } from '@/types/product-type';
 import { Products } from '@/data/products';
-import { useStore } from 'MainEntry/Store';
+import { useCartStore } from 'MainEntry/Store';
 
 const ProductList = () => {
-  const { setCart, cart } = useStore();
+  const { setCart, cart } = useCartStore();
   const [products, setProducts] = useState<ProductType[]>();
 
   useEffect(() => {
