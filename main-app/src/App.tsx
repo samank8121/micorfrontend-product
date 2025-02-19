@@ -7,19 +7,19 @@ const Button = lazy(() => import('ComponentsEntry/Button'));
 const ProductList = lazy(() => import('ProductsEntry/ProductList'));
 
 const App: React.FC = () => {
-  const [value, setValue] = React.useState<string>('');
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+  // const [value, setValue] = React.useState<string>('');
+  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValue(e.target.value);
+  // };
   return (
     <StoreProvider>      
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
+      {/* <Suspense fallback={<div>Loading...</div>}>
         <Input value={value} onChange={onChange} />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <Button variant="filled" size="m" onClick={() => alert(value)}><span>Click me!</span></Button>
-      </Suspense>
+      </Suspense> */}
       <Suspense fallback={<div>Loading...</div>}>
         <ProductList/>
       </Suspense>

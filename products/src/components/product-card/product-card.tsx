@@ -42,7 +42,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
         <a className={styles.imageContainer} href={`/${slug}`}>
           <img
-            src={imageSrc}
+            src={`${process.env.REACT_APP_IMAGE_ADDRESS}${imageSrc}`}
             alt={caption}
             loading='lazy'
             className={styles.img}

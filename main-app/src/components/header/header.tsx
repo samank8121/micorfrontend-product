@@ -19,14 +19,17 @@ const Header = () => {
 
       {showCart && (
         <ul className='cart-items'>
-          {cart.map((cartItem) => {
-            if(cartItem.quantity === 0) return null;
-            return (
-              <li key={cartItem.id}>
-                {cartItem.caption} ({cartItem.quantity})
-              </li>
-            );
-          })}
+          {cart.some((item) => item.quantity > 0) ? (
+            cart
+              .filter((item) => item.quantity > 0)
+              .map(({ id, caption, quantity }) => (
+                <li key={id}>
+                  {caption} ({quantity})
+                </li>
+              ))
+          ) : (
+            <li>Cart is empty</li>
+          )}
         </ul>
       )}
     </div>

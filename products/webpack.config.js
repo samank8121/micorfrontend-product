@@ -1,7 +1,8 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
@@ -26,16 +27,26 @@ module.exports = {
     },
   },
   devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-    },
+    static: [
+      {
+        directory: path.resolve(__dirname, 'dist'),
+      },
+      {
+        directory: path.resolve(__dirname, 'public'),
+        publicPath: '/',
+      },
+    ],
     compress: true,
     open: true,
     port: 3002,
     historyApiFallback: true,
-    hot: true, 
-  },  
+    hot: true,
+  },
+
   plugins: [
+    new DefinePlugin({
+      'process.env.REACT_APP_IMAGE_ADDRESS': JSON.stringify('http://localhost:3002/images/'),
+    }),
     new ModuleFederationPlugin({
       name: 'Products',
       filename: 'remoteEntry.js',
@@ -44,30 +55,30 @@ module.exports = {
         './ProductList': './src/components/product-list/product-list.tsx',
       },
       remotes: {
-        ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js', 
-        StoreEntry: 'Stores@http://localhost:3003/remoteEntry.js',       
+        ComponentsEntry: 'Components@http://localhost:3001/remoteEntry.js',
+        StoreEntry: 'Stores@http://localhost:3003/remoteEntry.js',
       },
       shared: {
-        react: { 
-          singleton: true, 
+        react: {
+          singleton: true,
           requiredVersion: false,
-          eager: true
+          eager: true,
         },
-        'react-dom': { 
-          singleton: true, 
+        'react-dom': {
+          singleton: true,
           requiredVersion: false,
-          eager: true
+          eager: true,
         },
         'react-redux': {
           singleton: true,
           requiredVersion: false,
-          eager: true
+          eager: true,
         },
         '@reduxjs/toolkit': {
           singleton: true,
           requiredVersion: false,
-          eager: true
-        }
+          eager: true,
+        },
       },
     }),
     new MiniCssExtractPlugin(),
