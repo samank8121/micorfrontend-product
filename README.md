@@ -1,17 +1,13 @@
-## Description
-Here's a corrected and improved version of your README file:  
-
----
-
 ## Description  
 
 This is a sample application with sub-projects following a microfrontend architecture, built using React and Webpack. The key projects include:  
 
 - **store**:  
-  - Uses Redux for state management.  
+  - Uses Redux for state management shared across `products` and `main-app`.  
 
 - **components**:  
-  - Contains common components shared across `products` and `main-app`.  
+  - Contains common components shared across `products` and `main-app`.
+  - Uses Sass for styling.  
 
 - **products**:  
   - Includes product-specific components.  
