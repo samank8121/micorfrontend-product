@@ -14,4 +14,7 @@ This is a sample application with sub-projects following a microfrontend archite
   - Uses Sass for styling.  
 
 - **main-app**:  
-  - Serves as the portal that integrates and renders `products`, `components`, and `store`.  
+  - Serves as the portal that integrates and renders `products`, `components`, and `store`.
+ 
+## Author
+[Saman Kefayatpour](https://www.linkedin.com/in/samankefayatpour/) 
