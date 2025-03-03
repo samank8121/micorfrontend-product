@@ -14,7 +14,29 @@ This is a sample application with sub-projects following a microfrontend archite
   - Uses Sass for styling.  
 
 - **main-app**:  
-  - Serves as the portal that integrates and renders `products`, `components`, and `store`.
- 
+  - Serves as the portal that integrates and renders `products`, `components`, and `store`.  
+
+## Project Setup
+
+# Install Dependencies
+Run the following command in both the client and server directories:
+
+```bash
+$ pnpm install
+```
+
+## Running the Project
+Each subproject should be started separately. Start them in the following order:
+
+1. components
+2. store
+3. product
+4. main-app (start this last)
+
+```bash
+# development
+$ pnpm run start
+```
+
 ## Author
-[Saman Kefayatpour](https://www.linkedin.com/in/samankefayatpour/) 
+[Saman Kefayatpour](https://www.linkedin.com/in/samankefayatpour/)
